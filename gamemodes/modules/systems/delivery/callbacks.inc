@@ -1,15 +1,8 @@
-public OnFilterScriptInit()
+Delivery_OnGamemodeInit()
 {
 	print("\n--------------------------------------");
 	print(" Delivery driver system ");
 	print("--------------------------------------\n");
-
-	new DeliveryVans[MAX_DELIVERY_VANS][E_VAN_SPAWN_DATA] =
-	{
-	    {2771.935, -2510.776, 13.740, 0.0},
-	    {2768.417, -2510.776, 14.214, 0.0},
-	    {2764.599, -2510.776, 14.214, 0.0}
-	};
 
 	//Create checkpoint and map icon for loading packages
 	CreateDynamicMapIcon(CP_CARGA_X, CP_CARGA_Y, CP_CARGA_Z, 11, 0, -1, -1, -1, 500.0, MAPICON_LOCAL);
@@ -28,27 +21,13 @@ public OnFilterScriptInit()
 
 }
 
-public OnFilterScriptExit()
-{
-	CleanupDeliverySystem();
-    return 1;
-}
-
-public OnPlayerRequestClass(playerid, classid)
-{
-	SetPlayerPos(playerid, 1958.3783, 1343.1572, 15.3746);
-	SetPlayerCameraPos(playerid, 1958.3783, 1343.1572, 15.3746);
-	SetPlayerCameraLookAt(playerid, 1958.3783, 1343.1572, 15.3746);
-	return 1;
-}
-
-public OnPlayerConnect(playerid)
+Delivery_OnPlayerConnect(playerid)
 {
 	ResetPlayerDeliveryProps(playerid);
     return 1;
 }
 
-public OnPlayerDisconnect(playerid, reason)
+Delivery_OnPlayerDisconnect(playerid, reason)
 {
 	if(PlayerDelivery[playerid][pDeliveryWorking])
 	{
@@ -57,7 +36,7 @@ public OnPlayerDisconnect(playerid, reason)
 	return 1;
 }
 
-public OnPlayerDeath(playerid, killerid, reason)
+Delivery_OnPlayerDeath(playerid, killerid, reason)
 {
 	if(PlayerDelivery[playerid][pDeliveryWorking])
 	{
@@ -67,7 +46,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 	return 1;
 }
 
-public OnVehicleSpawn(vehicleid)
+Delivery_OnVehicleSpawn(vehicleid)
 {
 	new playerid = DeliveryVehicle[vehicleid][dvPlayerid];
 
@@ -84,7 +63,7 @@ public OnVehicleSpawn(vehicleid)
 	return 1;
 }
 
-public OnVehicleDeath(vehicleid, killerid)
+Delivery_OnVehicleDeath(vehicleid, killerid)
 {
 	new playerid = DeliveryVehicle[vehicleid][dvPlayerid];
 
@@ -100,13 +79,13 @@ public OnVehicleDeath(vehicleid, killerid)
 	return 1;
 }
 
-public OnPlayerExitVehicle(playerid, vehicleid)
+Delivery_OnPlayerExitVehicle(playerid, vehicleid)
 {
 	PlayerTextDrawHide(playerid, DeliveryTD[playerid]); 
 	return 1;
 }
 
-public OnPlayerStateChange(playerid, newstate, oldstate)
+Delivery_OnPlayerStateChange(playerid, newstate, oldstate)
 {
 	
 	if (oldstate == PLAYER_STATE_ONFOOT && newstate == PLAYER_STATE_DRIVER) // Player entered a vehicle as a driver
@@ -142,7 +121,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	return 1;
 }
 
-public OnPlayerEnterDynamicCP(playerid, checkpointid)
+Delivery_OnPlayerEnterDynamicCP(playerid, checkpointid)
 {
 	if(!PlayerDelivery[playerid][pDeliveryWorking])
 	{
@@ -193,8 +172,6 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
             return SendDeliveryMessage(playerid, "Error: You must be carrying a package to deliver it. Get one from the van.", DELIVERY_ERROR);
         }
 
-		SendDeliveryMessage(playerid, "Stay inside the marker for 10 seconds to deliver...", DELIVERY_INFO);
-
 		CompleteDelivery(playerid);
 
 		return 1;
@@ -203,12 +180,7 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
     return 1;
 }
 
-public OnPlayerRequestSpawn(playerid)
-{
-	return 1;
-}
-
-public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+Delivery_OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
 	if(!PlayerDelivery[playerid][pDeliveryWorking])
 	{
@@ -265,24 +237,4 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
     }
 	
     return 1;
-}
-
-public OnPlayerStreamIn(playerid, forplayerid)
-{
-	return 1;
-}
-
-public OnPlayerStreamOut(playerid, forplayerid)
-{
-	return 1;
-}
-
-public OnVehicleStreamIn(vehicleid, forplayerid)
-{
-	return 1;
-}
-
-public OnVehicleStreamOut(vehicleid, forplayerid)
-{
-	return 1;
 }

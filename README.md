@@ -1,14 +1,22 @@
 # Delivery Driver System
 
-## Video preview
+## Video Preview
 
-- [Watch on YouTube](https://www.youtube.com/watch?v=Myd-5Kra7AA)
+* [Watch on YouTube](https://youtu.be/9amfkUx_6mQ)
 
 ---
 
-## Overview
+# Overview
 
-The Delivery Driver System is a side activity/job where players deliver packages across "Los Santos" using warehouse delivery vans.
+The Delivery Driver System is a side activity/job where players deliver packages across Los Santos using warehouse delivery vans.
+
+The system includes:
+
+* Physical package handling
+* Dynamic delivery destinations
+* Database integration
+* Player authentication
+* Modular architecture
 
 ---
 
@@ -16,18 +24,22 @@ The Delivery Driver System is a side activity/job where players deliver packages
 
 * Delivery warehouse with delivery van spawns
 * Package loading system
+* Physical package deliveries
 * Delivery destinations with checkpoints and map icons
 * Delivery vehicle registration system
 * Package counter textdraws
 * Delivery rewards
 * Dynamic delivery workflow
+* MySQL authentication system
+* Persistent player statistics
+* Modular gamemode architecture
 
 ---
 
 # Starting the Job
 
-1. Go to the delivery warehouse.
-2. Enter a delivery van.
+1. Go to the delivery warehouse
+2. Enter a delivery van
 3. Use the following command:
 
 ```pawn
@@ -82,7 +94,7 @@ Upon success:
 
 * A delivery destination is selected
 * A checkpoint is created
-* A map icon/marker is displayed
+* A map icon is displayed
 
 ---
 
@@ -90,10 +102,10 @@ Upon success:
 
 To complete a delivery:
 
-1. Park your car closer to the delivery checkpoint
-2. Exit the delivery van
-3. Open the van rear doors "Press [H]"
-4. Pick up a package "Press [Y]"
+1. Park the delivery van near the destination
+2. Exit the vehicle
+3. Open the van rear doors by pressing: [H]
+4. Pick up a package by pressing: [Y]
 5. Walk to the property's entrance
 6. Deliver the package
 
@@ -107,6 +119,8 @@ Each completed delivery rewards:
 $3,000
 ```
 
+Player money and delivery statistics are automatically saved in the database.
+
 ---
 
 # Commands
@@ -115,7 +129,34 @@ $3,000
 | ---------------- | -------------------------------------- |
 | `/startdelivery` | Starts the Delivery Driver job         |
 | `/nextdelivery`  | Requests the next delivery destination |
-| `/stopdelivery`  | Stops the current delivery job            |
+| `/stopdelivery`  | Stops the current delivery job         |
+
+---
+
+# Authentication System
+
+The project includes a MySQL-based authentication system with:
+
+* Player registration
+* Player login
+* Password hashing with SHA-256
+* Session handling
+* Persistent player data
+
+---
+
+# Database Features
+
+The system stores:
+
+* Player money
+* Completed deliveries
+* Authentication data
+* Delivery statistics
+
+All data is loaded and saved automatically using MySQL.
+
+---
 
 # Technical Notes
 
@@ -125,5 +166,37 @@ The system includes:
 * Player delivery state tracking
 * Dynamic checkpoints
 * Dynamic map icons
-* Per-player textdraws, checkpoints and icons
-* Package handling logic
+* Per-player textdraws, checkpoints, and icons
+* Physical package handling logic
+* Vehicle rear door interaction
+* MySQL database integration
+* Modular callback architecture
+* Persistent player data system
+
+---
+
+# Project Structure
+
+The project uses a modular architecture:
+
+```text
+gamemodes/
+├── modules/
+│    ├── core/
+│    │   ├── player/
+│    │   │   └── auth/
+│    │   │   └── core/
+│    │   └── vehicles/
+│    └── systems/
+|        └── delivery/
+|
+├── base.inc
+└── builder.pwn
+```
+
+This structure improves:
+
+* Scalability
+* Maintainability
+* Code organization
+* System separation

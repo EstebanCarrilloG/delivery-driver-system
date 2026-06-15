@@ -40,8 +40,6 @@ CleanupDeliverySystem(){
             ResetPlayerDeliveryProps(i);
 		}		
 	}
-
-
 }
 
 ResetPlayerDeliveryProps(playerid)
@@ -183,6 +181,8 @@ CompleteDelivery(playerid){
 
     format(msg, sizeof(msg), "Success: Delivery processed successfully. Package delivered. Payment received: $%d", DELIVERY_PAYOUT);
     SendDeliveryMessage(playerid, msg, DELIVERY_SUCCESS);
+
+    UpdateDeliveryStats(playerid);
 
     PlayerDelivery[playerid][pDeliveryInProgress] = false;
 

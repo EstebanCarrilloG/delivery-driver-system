@@ -1,3 +1,27 @@
+//Development command
+CMD:van(playerid, params[]){
+    for(new i = 1; i < MAX_VEHICLES; i++)
+    {
+            // Buscamos el primer vehículo que tenga tu enum en 'true'
+        if(DeliveryVehicle[i][dvCreated])
+        {
+            new Float:x, Float:y, Float:z;
+            GetVehiclePos(i, x, y, z);
+                
+                // Teletransportamos al jugador un poco más arriba del vehículo
+            SetPlayerPos(playerid, x, y, z + 2.0);
+            SetPlayerVirtualWorld(playerid, GetVehicleVirtualWorld(i));
+                
+            new msg[128];
+            format(msg, sizeof(msg), "[DEBUG] Teletransportado a la Van ID %d. Pos: %.2f, %.2f, %.2f", i, x, y, z);
+            SendClientMessage(playerid, 0xFFFF00FF, msg);
+            return 1;
+        }
+    }
+    SendClientMessage(playerid, 0xFF0000FF, "[DEBUG] No se encontro ninguna furgoneta con dvCreated = true");
+    return 1;
+}
+
 CMD:startdelivery(playerid, params[])
 {
     new vehicleid = GetPlayerVehicleID(playerid);
