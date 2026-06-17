@@ -14,3 +14,14 @@ stock ConnectToDatabase(){
 	print("MySQL connection is successful.");
     return 1;
 }
+
+forward OnQueryUpdateExecuted(playerid, const debug_context[]);
+public OnQueryUpdateExecuted(playerid, const debug_context[])
+{
+    if(mysql_errno(g_SQL) != 0)
+    {
+        printf("[MySQL ERROR] Update failed in: %s for player ID: %d", debug_context, playerid);
+        return 0;
+    }
+    return 1;
+}

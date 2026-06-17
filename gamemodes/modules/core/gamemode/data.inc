@@ -1,3 +1,5 @@
+
+//  Dialog IDs
 enum
 {
 	DIALOG_UNUSED,

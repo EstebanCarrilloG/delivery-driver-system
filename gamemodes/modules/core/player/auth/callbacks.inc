@@ -1,3 +1,5 @@
+#include <YSI_Coding\y_hooks>
+
 forward OnPlayerDataLoaded(playerid, race_check);
 public OnPlayerDataLoaded(playerid, race_check)
 {
@@ -73,7 +75,7 @@ public _KickPlayerDelayed(playerid)
 	return 1;
 }
 
-Auth_OnPlayerConnect(playerid){
+hook OnPlayerConnect(playerid){
     g_MysqlRaceCheck[playerid]++;
 
 	// reset player data
@@ -90,7 +92,7 @@ Auth_OnPlayerConnect(playerid){
     return 1;
 }
 
-Auth_OnPlayerDisconnect(playerid, reason){
+hook OnPlayerDisconnect(playerid, reason){
     // Handle player disconnect logic for authentication
 	g_MysqlRaceCheck[playerid]++;
 
@@ -114,7 +116,7 @@ Auth_OnPlayerDisconnect(playerid, reason){
     return 1;
 }
 
-Auth_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	switch (dialogid)
 	{
@@ -145,8 +147,6 @@ Auth_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				Player[playerid][LoginTimer] = 0;
 				Player[playerid][IsLoggedIn] = true;
 
-				// spawn the player to their last saved position after login
-				//SetSpawnInfo(playerid, NO_TEAM, 0, Player[playerid][X_Pos], Player[playerid][Y_Pos], Player[playerid][Z_Pos], Player[playerid][A_Pos], 0, 0, 0, 0, 0, 0);
 				gPlayerCitySelection[playerid] = CITY_LOS_SANTOS;
 				TogglePlayerSpectating(playerid, false);
 				SpawnPlayer(playerid);

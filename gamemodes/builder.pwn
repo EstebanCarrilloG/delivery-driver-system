@@ -11,7 +11,6 @@
 #include "modules/core/gamemode/main"
 #include "modules/core/db/main"
 #include "modules/core/player/main"
-#include "modules/core/vehicles/main"
 
 
 // Systems

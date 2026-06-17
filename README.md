@@ -2,7 +2,7 @@
 
 ## Video Preview
 
-* [Watch on YouTube](https://youtu.be/9amfkUx_6mQ)
+* [Watch on YouTube](https://youtu.be/S0ZIxUO6q7k)
 
 ---
 
@@ -29,10 +29,12 @@ The system includes:
 * Delivery vehicle registration system
 * Package counter textdraws
 * Delivery rewards
-* Dynamic delivery workflow
+* Score rewards for completed deliveries
+* Delivery statistics tracking
+* Player statistics command
 * MySQL authentication system
-* Persistent player statistics
-* Modular gamemode architecture
+* Persistent player data
+* Modular architecture powered by YSI hooks
 
 ---
 
@@ -111,12 +113,30 @@ To complete a delivery:
 
 ---
 
+# Statistics
+
+The system tracks player delivery progress and stores it in the database.
+
+Tracked statistics include:
+
+- Completed deliveries
+- Player money
+- Player score
+
+Players can view their progress at any time using:
+
+```pawn
+/stats
+```
+---
+
 # Rewards
 
 Each completed delivery rewards:
 
 ```text
 $3,000
++1 score point
 ```
 
 Player money and delivery statistics are automatically saved in the database.
@@ -130,6 +150,7 @@ Player money and delivery statistics are automatically saved in the database.
 | `/startdelivery` | Starts the Delivery Driver job         |
 | `/nextdelivery`  | Requests the next delivery destination |
 | `/stopdelivery`  | Stops the current delivery job         |
+| `/stats` | Displays player statistics |
 
 ---
 
@@ -150,6 +171,7 @@ The project includes a MySQL-based authentication system with:
 The system stores:
 
 * Player money
+* Player score
 * Completed deliveries
 * Authentication data
 * Delivery statistics

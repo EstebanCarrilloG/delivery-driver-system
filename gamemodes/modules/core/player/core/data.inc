@@ -7,6 +7,7 @@ enum E_PLAYERS
 	ID,
 	Name[MAX_PLAYER_NAME],
 	Password[65], // the output of SHA256_PassHash function (which was added in 0.3.7 R1 version) is always 256 bytes in length, or the equivalent of 64 Pawn cells
+	Score,
 	Money,
 	Salt[17],
 	Kills,

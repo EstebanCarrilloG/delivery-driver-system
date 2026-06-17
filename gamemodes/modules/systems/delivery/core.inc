@@ -182,7 +182,8 @@ CompleteDelivery(playerid){
     format(msg, sizeof(msg), "Success: Delivery processed successfully. Package delivered. Payment received: $%d", DELIVERY_PAYOUT);
     SendDeliveryMessage(playerid, msg, DELIVERY_SUCCESS);
 
-    UpdateDeliveryStats(playerid);
+    db_UpdateDeliveryStats(playerid, 1, DELIVERY_PAYOUT);
+    db_UpdatePlayerScore(playerid, 1);
 
     PlayerDelivery[playerid][pDeliveryInProgress] = false;
 

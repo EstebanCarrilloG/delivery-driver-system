@@ -1,4 +1,6 @@
-Delivery_OnGamemodeInit()
+#include <YSI_Coding\y_hooks>
+
+hook OnGameModeInit()
 {
 	print("\n--------------------------------------");
 	print(" Delivery driver system ");
@@ -21,13 +23,13 @@ Delivery_OnGamemodeInit()
 
 }
 
-Delivery_OnPlayerConnect(playerid)
+hook OnPlayerConnect(playerid)
 {
 	ResetPlayerDeliveryProps(playerid);
     return 1;
 }
 
-Delivery_OnPlayerDisconnect(playerid, reason)
+hook OnPlayerDisconnect(playerid, reason)
 {
 	if(PlayerDelivery[playerid][pDeliveryWorking])
 	{
@@ -36,7 +38,7 @@ Delivery_OnPlayerDisconnect(playerid, reason)
 	return 1;
 }
 
-Delivery_OnPlayerDeath(playerid, killerid, reason)
+hook OnPlayerDeath(playerid, killerid, reason)
 {
 	if(PlayerDelivery[playerid][pDeliveryWorking])
 	{
@@ -46,7 +48,7 @@ Delivery_OnPlayerDeath(playerid, killerid, reason)
 	return 1;
 }
 
-Delivery_OnVehicleSpawn(vehicleid)
+hook OnVehicleSpawn(vehicleid)
 {
 	new playerid = DeliveryVehicle[vehicleid][dvPlayerid];
 
@@ -63,7 +65,7 @@ Delivery_OnVehicleSpawn(vehicleid)
 	return 1;
 }
 
-Delivery_OnVehicleDeath(vehicleid, killerid)
+hook OnVehicleDeath(vehicleid, killerid)
 {
 	new playerid = DeliveryVehicle[vehicleid][dvPlayerid];
 
@@ -79,13 +81,13 @@ Delivery_OnVehicleDeath(vehicleid, killerid)
 	return 1;
 }
 
-Delivery_OnPlayerExitVehicle(playerid, vehicleid)
+hook OnPlayerExitVehicle(playerid, vehicleid)
 {
 	PlayerTextDrawHide(playerid, DeliveryTD[playerid]); 
 	return 1;
 }
 
-Delivery_OnPlayerStateChange(playerid, newstate, oldstate)
+hook OnPlayerStateChange(playerid, newstate, oldstate)
 {
 	
 	if (oldstate == PLAYER_STATE_ONFOOT && newstate == PLAYER_STATE_DRIVER) // Player entered a vehicle as a driver
@@ -121,7 +123,7 @@ Delivery_OnPlayerStateChange(playerid, newstate, oldstate)
 	return 1;
 }
 
-Delivery_OnPlayerEnterDynamicCP(playerid, checkpointid)
+hook OnPlayerEnterDynamicCP(playerid, checkpointid)
 {
 	if(!PlayerDelivery[playerid][pDeliveryWorking])
 	{
@@ -180,7 +182,7 @@ Delivery_OnPlayerEnterDynamicCP(playerid, checkpointid)
     return 1;
 }
 
-Delivery_OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
 	if(!PlayerDelivery[playerid][pDeliveryWorking])
 	{

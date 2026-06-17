@@ -1,6 +1,15 @@
+SetPlayerData(playerid)
+{
+	ResetPlayerMoney(playerid);
+	SetPlayerScore(playerid,0);
+
+	SetPlayerScore(playerid, Player[playerid][Score]);
+	GivePlayerMoney(playerid, Player[playerid][Money]);
+}
+
 UpdatePlayerDeaths(playerid)
 {
-	if (Player[playerid][IsLoggedIn] == false) return 0;
+	if (!Player[playerid][IsLoggedIn]) return 0;
 
 	Player[playerid][Deaths]++;
 
@@ -14,7 +23,7 @@ UpdatePlayerKills(killerid)
 {
 	// we must check before if the killer wasn't valid (connected) player to avoid run time error 4
 	if (killerid == INVALID_PLAYER_ID) return 0;
-	if (Player[killerid][IsLoggedIn] == false) return 0;
+	if (!Player[killerid][IsLoggedIn]) return 0;
 
 	Player[killerid][Kills]++;
 

@@ -12,3 +12,6 @@ CREATE TABLE IF NOT EXISTS `players`
     PRIMARY KEY (`id`),
     UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB;
+
+
+ALTER TABLE `players` ADD COLUMN `score` INT UNSIGNED DEFAULT 0;
